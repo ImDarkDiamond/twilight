@@ -478,6 +478,11 @@ mod tests {
     "roles": [
       {{
         "color": 0,
+        "colors": {{
+            "primary_color": 0,
+            "secondary_color": null,
+            "tertiary_color": null
+        }},
         "hoist": false,
         "id": "13312",
         "managed": false,
@@ -554,6 +559,11 @@ mod tests {
     "roles": [
       {{
         "color": 0,
+        "colors": {{
+            "primary_color": 0,
+            "secondary_color": null,
+            "tertiary_color": null
+        }},
         "hoist": false,
         "id": "47",
         "managed": false,

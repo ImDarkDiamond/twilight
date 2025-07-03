@@ -67,6 +67,8 @@ pub enum GuildFeature {
     VipRegions,
     /// Has enabled the welcome screen.
     WelcomeScreenEnabled,
+    /// Has access to set gradient colors to roles
+    EnhancedRoleColors,
     /// Variant value is unknown to the library.
     Unknown(String),
 }
@@ -105,6 +107,7 @@ impl From<GuildFeature> for Cow<'static, str> {
             GuildFeature::Verified => "VERIFIED".into(),
             GuildFeature::VipRegions => "VIP_REGIONS".into(),
             GuildFeature::WelcomeScreenEnabled => "WELCOME_SCREEN_ENABLED".into(),
+            GuildFeature::EnhancedRoleColors => "ENHANCED_ROLE_COLORS".into(),
             GuildFeature::Unknown(unknown) => unknown.into(),
         }
     }
@@ -142,6 +145,7 @@ impl From<String> for GuildFeature {
             "VERIFIED" => Self::Verified,
             "VIP_REGIONS" => Self::VipRegions,
             "WELCOME_SCREEN_ENABLED" => Self::WelcomeScreenEnabled,
+            "ENHANCED_ROLE_COLORS" => Self::EnhancedRoleColors,
             _ => Self::Unknown(value),
         }
     }
@@ -218,6 +222,10 @@ mod tests {
         serde_test::assert_tokens(
             &GuildFeature::WelcomeScreenEnabled,
             &[Token::Str("WELCOME_SCREEN_ENABLED")],
+        );
+        serde_test::assert_tokens(
+            &GuildFeature::EnhancedRoleColors,
+            &[Token::Str("ENHANCED_ROLE_COLORS")],
         );
         serde_test::assert_tokens(
             &GuildFeature::Unknown("UNKNOWN".to_owned()),

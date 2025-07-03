@@ -14,8 +14,8 @@ use twilight_model::{
     guild::{
         scheduled_event::{EntityType, GuildScheduledEvent, PrivacyLevel, Status},
         AfkTimeout, DefaultMessageNotificationLevel, Emoji, ExplicitContentFilter, Guild, Member,
-        MemberFlags, MfaLevel, NSFWLevel, PartialMember, Permissions, PremiumTier, Role, RoleFlags,
-        SystemChannelFlags, VerificationLevel,
+        MemberFlags, MfaLevel, NSFWLevel, PartialMember, Permissions, PremiumTier, Role,
+        RoleColors, RoleFlags, SystemChannelFlags, VerificationLevel,
     },
     id::{
         marker::{
@@ -309,9 +309,15 @@ pub fn member(id: Id<UserMarker>) -> Member {
     }
 }
 
+#[allow(deprecated)]
 pub fn role(id: Id<RoleMarker>) -> Role {
     Role {
         color: 0,
+        colors: RoleColors {
+            primary_color: 0,
+            secondary_color: None,
+            tertiary_color: None,
+        },
         hoist: false,
         icon: None,
         id,

@@ -1053,7 +1053,7 @@ mod tests {
     use crate::{test, DefaultInMemoryCache};
     use twilight_model::{
         gateway::payload::incoming::RoleDelete,
-        guild::{Member, MemberFlags, Permissions, Role, RoleFlags},
+        guild::{Member, MemberFlags, Permissions, Role, RoleColors, RoleFlags},
         id::Id,
         util::Timestamp,
     };
@@ -1078,6 +1078,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(deprecated)]
     fn highest_role() {
         let joined_at = Some(Timestamp::from_secs(1_632_072_645).expect("non zero"));
         let cache = DefaultInMemoryCache::new();
@@ -1106,6 +1107,11 @@ mod tests {
             vec![
                 Role {
                     color: 0,
+                    colors: RoleColors {
+                        primary_color: 0,
+                        secondary_color: None,
+                        tertiary_color: None,
+                    },
                     hoist: false,
                     icon: None,
                     id: Id::new(1),
@@ -1120,6 +1126,11 @@ mod tests {
                 },
                 Role {
                     color: 0,
+                    colors: RoleColors {
+                        primary_color: 0,
+                        secondary_color: None,
+                        tertiary_color: None,
+                    },
                     hoist: false,
                     icon: None,
                     id: Id::new(2),

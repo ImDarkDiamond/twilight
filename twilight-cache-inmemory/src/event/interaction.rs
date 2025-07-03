@@ -77,7 +77,7 @@ mod tests {
             Channel, ChannelType, Message,
         },
         gateway::payload::incoming::InteractionCreate,
-        guild::{MemberFlags, PartialMember, Permissions, Role, RoleFlags},
+        guild::{MemberFlags, PartialMember, Permissions, Role, RoleColors, RoleFlags},
         id::Id,
         oauth::ApplicationIntegrationMap,
         user::User,
@@ -242,6 +242,11 @@ mod tests {
                         Id::new(8),
                         Role {
                             color: 0u32,
+                            colors: RoleColors {
+                                primary_color: 0u32,
+                                secondary_color: None,
+                                tertiary_color: None,
+                            },
                             hoist: false,
                             icon: None,
                             id: Id::new(8),
