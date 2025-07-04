@@ -8,7 +8,7 @@ use crate::{
 use serde::Serialize;
 use std::future::IntoFuture;
 use twilight_model::{
-    guild::{Permissions, Role},
+    guild::{Permissions, Role, RoleColors},
     id::{
         marker::{GuildMarker, RoleMarker},
         Id,
@@ -20,6 +20,8 @@ use twilight_validate::request::{audit_reason as validate_audit_reason, Validati
 struct UpdateRoleFields<'a> {
     #[serde(skip_serializing_if = "Option::is_none")]
     color: Option<Nullable<u32>>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    colors: Option<&'a RoleColors>,
     #[serde(skip_serializing_if = "Option::is_none")]
     hoist: Option<bool>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -53,6 +55,7 @@ impl<'a> UpdateRole<'a> {
         Self {
             fields: UpdateRoleFields {
                 color: None,
+                colors: None,
                 hoist: None,
                 icon: None,
                 mentionable: None,
@@ -74,8 +77,20 @@ impl<'a> UpdateRole<'a> {
     /// to [`COLOR_MAXIMUM`] for the maximum acceptable value.
     ///
     /// [`COLOR_MAXIMUM`]: twilight_validate::embed::COLOR_MAXIMUM
+    #[deprecated(note = "use colors instead")]
     pub const fn color(mut self, color: Option<u32>) -> Self {
         self.fields.color = Some(Nullable(color));
+
+        self
+    }
+
+    /// Set the role colors.
+    ///
+    /// See [Discord Docs/Role Colors]
+    ///
+    /// [Discord Docs/Role Colors]: https://discord.com/developers/docs/topics/permissions#role-object-role-colors-object
+    pub const fn colors(mut self, colors: &'a RoleColors) -> Self {
+        self.fields.colors = Some(colors);
 
         self
     }
